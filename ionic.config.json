@@ -1,0 +1,7 @@
+{
+  "name": "wordsearch",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
