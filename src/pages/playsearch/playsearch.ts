@@ -24,11 +24,14 @@ export class PlaysearchPage {
   public data:any;
  public showdata: {};
  typedText :any;
- wordmatches=[];
+ 
+ wordmatched=[];
+ word1;items=[];
+
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:HttpClient,private fetch:FetchApiProvider) {
    // this.word=this.randomString();
-    this.http=http;
+  
     this.word=(this.fetch.getUrlApi().subscribe(data=>{
       console.log(data);
       let tempword="";
@@ -47,12 +50,17 @@ export class PlaysearchPage {
    
   }
  verifyWords(typedText){
-  let wordmatched=[{}];
   let wordpresent=0;
   let wordfound=false;
   this.showdata=(this.fetch.getUrlApi().subscribe(data=>{
   console.log(data);
-  
+  for(let i=0;i<this.wordmatched.length;i++){
+  if(this.wordmatched[i]==typedText)
+  {
+    alert("duplicate word");
+    return;
+  }
+}
   let tempword="";
     for(let i=0;i<data[0].words.length;i++){
     tempword=data[0].words[i];
@@ -65,29 +73,42 @@ export class PlaysearchPage {
     
     if(typedText===data[0].words[i]){
       wordfound=true;
+      //this.word1=typedText;
+    this.items.push(typedText);
+     
+      
     }
+   
     
   }
-  let c=0;
-  if(wordfound===true) 
-  {  
-   alert("word is matched"); 
-   wordmatched.push(this.typedText);
-   console.log(wordmatched.push(data[0].words));
-   if(wordmatched.push(typedText)===typedText)
-   console.log("jjklj");
-  
-  }
    
+   if(wordfound===true) 
+   {  
+   alert("word is matched"); 
+   this.wordmatched.push(this.typedText);
+   console.log(this.wordmatched);
+  /* for(let i=0;i<this.wordmatched.length;i++){
+     this.matchedword.push(this.wordmatched);
+   }*/
+  
+    }
   else
   {
     alert("notfound or blank");
   }
  
+  }));
+ /* for(let i=0;i<this.wordmatched.length;i++)
+  {this.matchedword.push(this.wordmatched);
+  }
+  console.log(this.matchedword);*/
+ 
+ //for(let i=0;i<this.wordmatched.length;i++){
+//  this.wordlength.push(this.wordmatched[i]);
+ 
+// }
   
  
-  }));
-   
 } 
  
 }

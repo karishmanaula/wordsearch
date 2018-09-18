@@ -16,22 +16,10 @@
   <ion-card-header>
   </ion-card-header>
   <ion-card-content>
-    <ion-grid>
-      <ion-row>
-        <ion-col> <ion-input class="input1" type="text" value=""></ion-input></ion-col>
-        <ion-col><ion-input class="input1"  type="text" value=""></ion-input> </ion-col>
-        <ion-col><ion-input class="input1" type="text" value=""></ion-input> </ion-col>
-        
-
-    </ion-row>
-    <ion-row>
-        <ion-col> <ion-input class="input1" type="text" value=""></ion-input></ion-col>
-        <ion-col><ion-input class="input1"  type="text" value=""></ion-input> </ion-col>
-        <ion-col><ion-input class="input1"  type="text" value=""></ion-input> </ion-col>
-      
-    </ion-row>
-    </ion-grid>
-  </ion-card-content>
+ <ion-item *ngFor="let values of items; let i = index ">
+  <ion-input type="text" [(ngModel)]="items[i]"></ion-input>      
+  </ion-item>
+</ion-card-content>
 </ion-card>
 <ion-grid>
  <ion-row>
