@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import{PlaysearchPage} from '../playsearch/playsearch';
+import{ GamestartPage} from '../gamestart/gamestart';
 
 @Component({
   selector: 'page-home',
@@ -13,7 +14,7 @@ export class HomePage {
 
   }
   goToPlaySearch(){
-    this .navCtrl.push(PlaysearchPage);
+    this .navCtrl.push(GamestartPage);
   }
 
 }

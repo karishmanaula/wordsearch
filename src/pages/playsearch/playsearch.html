@@ -8,14 +8,23 @@
 
   <ion-navbar>
     <ion-title>playsearch</ion-title>
+    
   </ion-navbar>
-
+ 
 </ion-header>
 <ion-content padding="true" >
   <ion-card >
+   
   <ion-card-header>
+   
   </ion-card-header>
   <ion-card-content>
+  <ion-label>Score</ion-label>
+  <ion-input type="text" [(ngModel)]="score">
+  </ion-input>
+  <ion-label>Bonus</ion-label>
+  <ion-input type="text" [(ngModel)]="bonus">
+  </ion-input>
  <ion-item *ngFor="let values of items; let i = index ">
   <ion-input type="text" [(ngModel)]="items[i]"></ion-input>      
   </ion-item>
@@ -25,8 +34,11 @@
  <ion-row>
  <ion-col><ion-label color="Primary">{{word}}</ion-label></ion-col>
 <ion-col><ion-input class="input2" type="text"value=""[(ngModel)]="typedText" ></ion-input></ion-col>
+<ion-col><ion-input class="input1" type="text"value=""[(ngModel)]="wordtyped" ></ion-input></ion-col>
 </ion-row>
 </ion-grid>
 <button ion-button round (click)="verifyWords(typedText)"> submit </button>
-
+<ion-label>Level</ion-label>
+<ion-input right-bottom type=text value="" >{{level}}</ion-input>
+<button ion-button round (click)="datafetching(typedText)"> check</button>
 </ion-content>
