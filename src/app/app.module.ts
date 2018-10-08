@@ -14,8 +14,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { DatabaseProvider } from '../providers/database/database';
 import{AngularFireModule} from 'angularfire2';
 import{AngularFireDatabaseModule} from 'angularfire2/database';
-
-
 var config = {
   apiKey: "AIzaSyBfhGHq1QWAmQaLU7HKI8ZntY1n_MZJnhk",
   authDomain: "wordgame-b3956.firebaseapp.com",

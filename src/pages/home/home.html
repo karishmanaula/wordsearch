@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header >
   <ion-navbar>
     <ion-title>
       Ionic Blank
@@ -6,6 +6,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <button ion-button round (click)="goToPlaySearch()">Word Search </button>
+<ion-content class="body"> 
+ <div class ="container">
+      <span class="text1">Word Search</span>
+      
+  </div>
+  <div>
+  <button class="button1" ion-button round (click)="goToPlaySearch()">Play </button><br>
+  </div>
+  <div>
+  <button  class="button2" ion-button round (click)="home.html" >Daily Puzzle</button>
+  </div>
 </ion-content>

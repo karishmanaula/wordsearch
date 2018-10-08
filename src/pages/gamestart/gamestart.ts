@@ -4,7 +4,6 @@ import { FetchApiProvider } from '../../providers/fetch-api/fetch-api';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import{AngularFireDatabase} from 'angularfire2/database';
-import { checkAndUpdateBinding } from '@angular/core/src/view/util';
 
 
 //import { IonicStorageModule } from '@ionic/storage';
@@ -38,6 +37,7 @@ export class GamestartPage {
   arraytemp=[];
   shuffledword1="";
   obj_keys;
+  
   constructor(public navCtrl: NavController, private angularFiredatabase:AngularFireDatabase,public navParams: NavParams,public http:HttpClient,private fetch:FetchApiProvider,private storage: Storage) {
    
       this.dict=(this.fetch.getDataFromApi().subscribe(dictionary=>{
@@ -57,7 +57,7 @@ export class GamestartPage {
           console.log("");
 
          
-        
+      
 
 
 
@@ -240,100 +240,7 @@ SaveData(typedText){
 }
 arraypos=[];
 
-//checkforRandomWordgeneration(typedText,word)
- // {
-        
-        //console.log(ran_word);
-       // var splitword=ran_word.split("");
-        //console.log(splitword);
-         
-      
-       // console.log("+++++++++++++++++++++++++++++++++++++++++++++++");   
-       // let len=splitword.length;
-       // let leng=0;
-       // let arraylength=0;
-       
-       // let num= Math.floor(Math.random()*(len-1+2))+2;
-        
-      /*  for(let i=0;i<num;i++) 
-        {
-          var ran_letter=splitword[Math.floor(Math.random()*splitword.length)];
-          
-          this.temp+=ran_letter;
-        }*/
-        //console.log("length of random word "+this.temp.length);
 
-      //  console.log("*******random letter********"+ this.temp);
-       // this.fetch.getDataFromApi().subscribe((dictionary)=>{
-        //  var obj_keys = Object.keys(dictionary); 
-         
-        // var ranwords = obj_keys[Math.floor(Math.random() * obj_keys.length)];
-        // console.log("Second Random word is "+ranwords);  
-      
-
-         /* if(dictionary.hasOwnProperty(this.temp)){
-            console.log("data is present +"+this.temp);
-          }
-          else{
-            console.log("we need to shuffle the word");
-            console.log("tempword    "+this.temp);
-
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            for(let i=0;i<this.temp.length;i++){
-          
-            this.shuffledword1=this.shuffelWord(this.temp);
-            
-          // this.arraytemp.push(this.shuffelWord);
-
-            }
-            console.log("shuffleword   "  +this.shuffledword1);
-
-          }*/
-        //});
-
-
-
-
-       /* for(let i=0;i<splitword.length;i++){
-         arraylength= Math.floor(Math.random() * (len-1+0)) + 0;
-        this.arraypos.push(splitword[arraylength]);
-        console.log("==============="+this.arraypos);
-        console.log(arraylength);
-          if(this.arraypos[i+1]!==this.arraypos[i])
-          { console.log("we are here");
-          this .temp+=splitword[arraylength];
-          console.log(this.temp);
-           
-          }
-          else{
-           
-          }*/
-      
-        
-       /* console.log("***************************************************");
-        let n=Math.floor(Math.random()*this.temp.length);
-       
-        for(let i=0;i<n;i++){
-          this.fetch.getDataFromApi().subscribe((dictionary)=>{
-         this. dictionarydata= Object.keys(dictionary); 
-         if(this.temp==this.dictionarydata){
-           console.log("Word found");
-
-         }
-         else{
-           console.log("Need to Shuffle the word " + this.temp);
-           console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-           var shuffledword=this.shuffelWord(this.temp);
-           console.log("shuffleword"+shuffledword);
-
-          // this.checkforRandomWordgeneration(this.temp);
-         }
-          });
-
-
-     
-      
-}*/   
  // }
 /*  shuffelWord (temp){
   
@@ -348,36 +255,106 @@ arraypos=[];
 
 }*/
 
-checkforRandomWordgeneration(typedText,word)
+/*checkforRandomWordgeneration(typedText,word)
 {
+  
+  this.wordmatched.push(typedText);
+  console.log(this.wordmatched);
   console.log("text we typed in the textbox "+typedText);
   console.log("Our Word from dictionary "+word );
   let len=word.length;
 
   let num= Math.floor(Math.random()*(len-1+2)+2);
   console.log("Random number Value is "+ num);
+ 
   console.log("len "+len);
   
     if(typedText.length>=2)
     {
-        if(word.indexOf(typedText))
+      this.items.push(typedText);
+      for(let i=0;i<this.items.length;i++)
+      {
+        this.items[i]=typedText;
+        //var temp+=typedText;
+      }
+
+      console.log("##########################");
+       // if(word.indexOf(typedText)>-1)
+       if(word.includes(typedText))
         {
+            console.log( word.includes(typedText));
+          //console.log(word.indeuxOf(typedText)>-1);
           this.fetch.getDataFromApi().subscribe(dictionary=>{
     
        
             if(dictionary.hasOwnProperty(typedText)){
               console.log("word found");
             }
-            else{
-              console.log("word not found");
-            }
+           
           });
           
         }
     }
+    if(typedText.length<2){
+      console.log("word limit not exits");
+    } 
     
-     
     
   
-}
+}*/
+checkforRandomWordgeneration(typedText,word){
+ 
+  let count=0;
+  let word_letters;
+  this.items.push(word.split(''));
+
+  this.fetch.getDataFromApi().subscribe(dictionary=>{
+  
+    var obj_keys = Object.keys(dictionary); 
+    for(var k=0;k<obj_keys.length;k++) 
+    {
+      word_letters = obj_keys[k].split('');
+      let matched_letter_count = 0;
+      for(let l=0; l<word_letters.length; l++) 
+      {  
+          let  letter= word_letters[l];
+          if(this.items.indexOf(letter)>-1)
+          {
+            //console.log(this.items.indexOf(letter)>-1);
+            matched_letter_count++;
+          
+            if(matched_letter_count===word_letters.length)
+          {
+            console.log("match");
+            this.wordmatched.push(letter);
+          }
+           
+            //this.wordmatched.push(letter);
+          
+          }
+          else{
+            console.log("unmatched");
+          }
+          
+          
+          
+          // match if this letter exists in main array of circle gesture
+          // if matched matched_letter_count++
+          // if word_letters.length == matched_letter_count its a match push it in a saperate array
+          // don't consider words having length 1
+     // }
+    
+      }
+      //console.log("kkkkkkkkkkk" ,word_letters);
+
+    }
+      
+   
+  
+    
+    
+  });
+
+  }
+
 }
