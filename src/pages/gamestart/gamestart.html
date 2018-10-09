@@ -14,21 +14,33 @@
  
 </ion-header>
 <ion-content padding="true" class="body" >
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Score</ion-label>
+            <ion-input type="text" [(ngModel)]="score">
+            </ion-input>
+          </ion-col>
+        <ion-col>
+            <ion-label>Bonus</ion-label>
+            <ion-input type="text" [(ngModel)]="bonus">
+            </ion-input>
+          </ion-col>
+        </ion-row>
+  </ion-grid>
   <ion-card >
-   <button ion-button></button>
-  <ion-card-header>
-   
-  </ion-card-header>
-  <ion-card-content class="body1">
-  <ion-label>Score</ion-label>
+  
+ <ion-card-content class="body1">
+  <!-- <ion-label>Score</ion-label>
   <ion-input type="text" [(ngModel)]="score">
   </ion-input>
   <ion-label>Bonus</ion-label>
   <ion-input type="text" [(ngModel)]="bonus">
-  </ion-input>
- <ion-item *ngFor="let values of items; let i = index ">
-  <ion-input type="text" [(ngModel)]="items[i]"></ion-input>      
-  </ion-item>
+  </ion-input>-->
+ <!--<ion-item *ngFor="let values of items; let i = index ">-->
+  
+  <ion-input *ngFor="let value of number;let i=index" type="text" [(ngModel)]="items[i]"></ion-input>      
+<!--</ion-item>-->
 </ion-card-content>
 </ion-card>
 

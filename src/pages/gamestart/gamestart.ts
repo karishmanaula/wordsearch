@@ -44,18 +44,23 @@ export class GamestartPage {
         console.log(dictionary);
         this. obj_keys = Object.keys(dictionary);   
        
-        this. ran_word =this. obj_keys[Math.floor(Math.random() * this.obj_keys.length)];
+      //  this. ran_word =this. obj_keys[Math.floor(Math.random() * this.obj_keys.length)];
+      this. ran_word =this. obj_keys[Math.floor(2+(Math.random()*(5-2)))];
+      console.log("length of random word ", this.ran_word.length);
+      console.log("this.randword"+this.ran_word);
        // var ran_word = obj_keys[Math.floor(Math.random() * 5)];
-         console.log(this.ran_word);
+        
+        console.log(this.ran_word);
          console.log("hello");
           this.word=this.ran_word;
           //var splitword=ran_word.split("");
           
          // console.log(splitword);
           console.log(this.word);
+      
           console.log("finish");  
           console.log("");
-
+        
          
       
 
@@ -207,7 +212,7 @@ export class GamestartPage {
     this.dict=(this.fetch.getDataFromApi().subscribe(dictionary=>{
       console.log(dictionary);
       var obj_keys = Object.keys(dictionary);   
-        var ran_word = obj_keys[Math.floor(Math.random() * obj_keys.length)];
+        var ran_word = obj_keys[Math.floor(Math.random() *obj_keys.length*5)];
        var randoms= ran_word.split('');
        console.log(randoms);
        if(typedText.length>this.word.length){

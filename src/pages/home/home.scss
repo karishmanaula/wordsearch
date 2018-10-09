@@ -5,7 +5,7 @@ page-home {
         font-family:sans-serif;
 
     }
-    .button2{
+    /*.button2{
         background:green;
        // position:absolute;
         margin: auto;
@@ -18,6 +18,14 @@ page-home {
         display: inline-block;
     
         
+
+    }*/
+    .button2{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin:auto;
 
     }
     .button1{
@@ -60,6 +68,10 @@ page-home {
         background-color:orange;
 
     }
+    .center-div{
+        text-align:center;
+        padding-top: 175px;
+    }
     .container{
         text-align:center;
         position:absolute;
@@ -83,7 +95,8 @@ page-home {
     letter-spacing:4px;
     margin-bottom: 20px;
     position: relative;
-    animation:text 3s 5;
+    animation:text 3s 15;
+   // animation:infinite normal;
 
 }
 
@@ -102,4 +115,7 @@ page-home {
     }
 }
 }
+@media only screen and (min-width:320px) and (max-width:420px){
+    page-home .center-div{padding-top:350px}
 
+}
