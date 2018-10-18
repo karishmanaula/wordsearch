@@ -4,6 +4,8 @@ import { FetchApiProvider } from '../../providers/fetch-api/fetch-api';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import{AngularFireDatabase} from 'angularfire2/database';
+import { shimContentAttribute } from '@angular/platform-browser/src/dom/dom_renderer';
+import { Element } from '@angular/compiler';
 
 
 //import { IonicStorageModule } from '@ionic/storage';
@@ -22,6 +24,9 @@ export class GamestartPage {
     public showdata: {};
     typedText :any;
     other;
+    count;
+    elements = [];
+    wordlen=0;
     bonusword=[];
     wordmatched=[];
     word1;items=[];
@@ -41,76 +46,80 @@ export class GamestartPage {
   constructor(public navCtrl: NavController, private angularFiredatabase:AngularFireDatabase,public navParams: NavParams,public http:HttpClient,private fetch:FetchApiProvider,private storage: Storage) {
    
       this.dict=(this.fetch.getDataFromApi().subscribe(dictionary=>{
-        console.log(dictionary);
-        this. obj_keys = Object.keys(dictionary);   
+  
+      this. obj_keys = Object.keys(dictionary);   
        
-      //  this. ran_word =this. obj_keys[Math.floor(Math.random() * this.obj_keys.length)];
-      this. ran_word =this. obj_keys[Math.floor(2+(Math.random()*(5-2)))];
-      console.log("length of random word ", this.ran_word.length);
-      console.log("this.randword"+this.ran_word);
-       // var ran_word = obj_keys[Math.floor(Math.random() * 5)];
+       this. ran_word =this. obj_keys[Math.floor(Math.random() * this.obj_keys.length)];
+       this.wordlen=this.ran_word.length;
+       console.log("length of random word ", this.wordlen);
+       this.word=this.ran_word;
+      this.dynamicTextBox(this.wordlen,this.ran_word);
+
+       console.log("");
         
-        console.log(this.ran_word);
-         console.log("hello");
-          this.word=this.ran_word;
-          //var splitword=ran_word.split("");
-          
-         // console.log(splitword);
-          console.log(this.word);
-      
-          console.log("finish");  
-          console.log("");
-        
-         
-      
-
-
-
-
-
-
-
-
-
-        //  this.checkforRandomWordgeneration(this.ran_word); 
-        /*  let len=splitword.length;
-          let temp:any="";
-          console.log("split word length "+len); 
-          for(let i=0;i<splitword.length-1;i++){
-          var arraylength= Math.floor(Math.random() * (len-1+0)) + 0;
-          
-          console.log("Indices for random word"+ arraylength );
-          //tempword+this.push(splitword[arraylength]);
-          console.log("word at the random position "+splitword[arraylength]);
-          temp+=splitword[arraylength];
-          console.log("word formed for shufling  "+temp);
-          }
-          var wordfor=[Math.floor(Math.random()*splitword.length)];
-          console.log("wordFormation to run for loop "+wordfor );
-          var arrayfor="";
-          for(let i=0;i<wordfor.length;i++)
-          {
-             arrayfor+=splitword[arraylength];
-          }
-          console.log("Value For arrayfor "+arrayfor);
-           var index=[Math.floor(Math.random()*splitword.length)];
-           console.log("Index of array" +index);
-            
-          for(let i=0;i<splitword.length;i++){
-
-          }*/
         })); 
-
-
-        this.angularFiredatabase.list("/FireData/").subscribe(data=>{
-          this.arraydata=data;
-          console.log(this.arraydata);
-        }); 
+       /* this.angularFiredatabase.list("/FireData/").subscribe(data=>{
+        this.arraydata=data;
+        console.log(this.arraydata);
+        }); */
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad(wordlen) {
     console.log('ionViewDidLoad GamestartPage');
   }
+
+  dynamicTextBox(wordlen,ran_word)
+  {
+   
+    let value=[];
+    let count;
+    let c=0;
+    let currentWordLength:any;
+    for(let i=0;i<wordlen;i++)
+    {
+    currentWordLength=Math.floor(Math.random()*(wordlen-2))+2;
+    console.log(currentWordLength);
+   
+    
+    if(currentWordLength!==0)
+    {
+     // c++;
+     this.items.push(currentWordLength); 
+    }
+     
+   
+    }
+    for(let i=0;i<this.items.length;i++){
+      this.items.sort();
+    }
+  
+    console.log("sorted array value",this.items);
+    for(let i=0;i<this.items.length;i++){
+      count=this.items[i]
+      console.log("count",count);
+      for(let i=0;i<count;i++){
+        this.elements.push(true);
+      }
+      this.elements.push(false);
+    }
+
+   
+
+
+
+
+  //   console.log("Value for count",c);
+  //   console.log("value of items array",this.items);
+  //   value.push(this.items);
+  //   console.log("elements inside value array is",value);
+  //   for(let i=0; i<value.length;i++){
+  //     count=value[i];
+  //     for(i=0;i<count;i++)
+  //   this.elements.push(true);
+  // }
+  // this.elements.push(false);
+  }
+
 
   verifyWords(typedText){
     console.log(typedText);
@@ -124,7 +133,7 @@ export class GamestartPage {
           }
         
           
-          for(let i=0;i<this.wordmatched.length;i++) {
+          for (let i=0;i<this.wordmatched.length;i++) {
               if(this.wordmatched[i]==typedText) {
                   alert("duplicate word");
                   return;
@@ -241,7 +250,7 @@ export class GamestartPage {
 
 SaveData(typedText){
   this.angularFiredatabase.list("/FireData/").push(this.typedText);
-  console.log("Data is save in FireB  ase"    +this.typedText);
+  console.log("Data is save in FireBase"    +this.typedText);
 }
 arraypos=[];
 
@@ -260,53 +269,7 @@ arraypos=[];
 
 }*/
 
-/*checkforRandomWordgeneration(typedText,word)
-{
-  
-  this.wordmatched.push(typedText);
-  console.log(this.wordmatched);
-  console.log("text we typed in the textbox "+typedText);
-  console.log("Our Word from dictionary "+word );
-  let len=word.length;
 
-  let num= Math.floor(Math.random()*(len-1+2)+2);
-  console.log("Random number Value is "+ num);
- 
-  console.log("len "+len);
-  
-    if(typedText.length>=2)
-    {
-      this.items.push(typedText);
-      for(let i=0;i<this.items.length;i++)
-      {
-        this.items[i]=typedText;
-        //var temp+=typedText;
-      }
-
-      console.log("##########################");
-       // if(word.indexOf(typedText)>-1)
-       if(word.includes(typedText))
-        {
-            console.log( word.includes(typedText));
-          //console.log(word.indeuxOf(typedText)>-1);
-          this.fetch.getDataFromApi().subscribe(dictionary=>{
-    
-       
-            if(dictionary.hasOwnProperty(typedText)){
-              console.log("word found");
-            }
-           
-          });
-          
-        }
-    }
-    if(typedText.length<2){
-      console.log("word limit not exits");
-    } 
-    
-    
-  
-}*/
 checkforRandomWordgeneration(typedText,word){
  
   let count=0;

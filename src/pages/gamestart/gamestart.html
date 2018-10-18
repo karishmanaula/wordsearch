@@ -28,9 +28,9 @@
           </ion-col>
         </ion-row>
   </ion-grid>
-  <ion-card >
+  <ion-card>
   
- <ion-card-content class="body1">
+ <ion-card-content class="body1" style="height:5000px">
   <!-- <ion-label>Score</ion-label>
   <ion-input type="text" [(ngModel)]="score">
   </ion-input>
@@ -39,25 +39,47 @@
   </ion-input>-->
  <!--<ion-item *ngFor="let values of items; let i = index ">-->
   
-  <ion-input *ngFor="let value of number;let i=index" type="text" [(ngModel)]="items[i]"></ion-input>      
+  <!--<ion-input type="text" [(ngModel)]="items[i]"></ion-input>-->
+
+<!--<span *ngFor="let values of elements;let i=index">
+  <span [(ngModel)]="elements[i]"></span>
+</span> -->
+
+<div *ngFor="let values of elements; let i=index">
+  
+  <ng-template [ngIf]="values" [ngIfElse]="loggedOut">
+    <input class="inputBox" type="text">
+    <!-- input -->
+  </ng-template>
+  <ng-template #loggedOut>
+    <br>
+    <br>
+     <br> 
+    <br>
+  </ng-template>
+</div>
+
+
+
 <!--</ion-item>-->
 </ion-card-content>
 </ion-card>
 
 <ion-grid>
- <ion-row>
- <ion-col><ion-label color="Primary">{{word}}</ion-label></ion-col>
-<ion-col><ion-input class="input2" type="text"value=""[(ngModel)]="typedText" ></ion-input></ion-col>
+  <ion-row>
+    <ion-col>
+      <ion-label color="Primary">{{word}}</ion-label>
+    </ion-col>
+    <ion-col>
+        <ion-input class="input2" type="text"value=""[(ngModel)]="typedText" ></ion-input></ion-col>
 <ion-col><ion-input class="input1" type="text"value=""[(ngModel)]="wordtyped" ></ion-input></ion-col>
 </ion-row>
 </ion-grid>
 <button ion-button round (click)="verifyWords(typedText)"> submit </button>
 <ion-label>Level</ion-label>
-<ion-input right-bottom type=text value="" >{{level}}</ion-input>
-<button ion-button round (click)="datafetching(typedText)" > check</button>
-<ion-input type="text"[(ngModel)]="InputUser" placeholder="Enter your Text"></ion-input>
+<ion-input right-bottom type=text value="Level 1" >{{level}}
+</ion-input>
+<button  ion-button round (click)="datafetching(typedText)"> check</button>
 <button ion-button (click)=SaveData(typedText)>SaveData</button>
-<button ion-button (click)=checkforRandomWordgeneration(typedText,word)>LoadData</button>
-
 
 </ion-content>

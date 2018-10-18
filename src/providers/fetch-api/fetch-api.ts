@@ -34,7 +34,7 @@ getData(){
 
 
 getDataFromApi(){
-  return this.http.get('/assets/json/dictionarydata.json');
+  return this.http.get('/assets/json/dictionary.json');
 }
 
 }
