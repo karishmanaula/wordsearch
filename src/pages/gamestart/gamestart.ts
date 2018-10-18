@@ -38,42 +38,100 @@ export class GamestartPage {
     key:string ='username';
     arraydata=[];
     ran_word;
-  temp="";
+  temp=""; 
+
   arraytemp=[];
   shuffledword1="";
-  obj_keys;
+  obj_keys=[];
+  obj_values=[];
+  tempword="";
+
   
   constructor(public navCtrl: NavController, private angularFiredatabase:AngularFireDatabase,public navParams: NavParams,public http:HttpClient,private fetch:FetchApiProvider,private storage: Storage) {
-   
+   let j=0;
       this.dict=(this.fetch.getDataFromApi().subscribe(dictionary=>{
-  
-      this. obj_keys = Object.keys(dictionary);   
-       
-       this. ran_word =this. obj_keys[Math.floor(Math.random() * this.obj_keys.length)];
-       this.wordlen=this.ran_word.length;
-       console.log("length of random word ", this.wordlen);
-       this.word=this.ran_word;
-      this.dynamicTextBox(this.wordlen,this.ran_word);
+      
+     // this.obj_keys = Object.keys(dictionary); 
+     // console.log(this.obj_keys);
+ 
+      this.obj_values=Object.entries(dictionary); 
+      this.obj_keys=Object.values(dictionary);
+      console.log("value----> ",this.obj_keys);
+      
+      // for (let val of Object.values(dictionary)) {
+      //   console.log(val);
+      // }
 
-       console.log("");
+      // for(let i in this.obj_keys){
+      //   let temp=[];
+      //   for(let j in this.obj_keys[i] )
+      //   {
+      //     temp.push(this.obj_keys[i][j]);
+      //   }
+      //   this.arraydata.push(temp);
+      // }
+     // console.log(this.obj_keys);
+  
+    }));
+      // for(let i=0;i<this.obj_keys.length;i++)let
+      // {
+      //   for (let i in a) {
+      //     let temp = [];
+      //     for (let j in a[i]) {
+      //       temp.push(a[i][j]);
+      //     }
+      //     array.push(temp);
+      //   }
+       
+       
+        // this.tempword=this.obj_keys[i];
+        // for(let j=0;j<Object.keys(this.tempword).length;j++){
+        // console.log("value of keys ",Object.keys(this.tempword));
+        // }
+       
+        // let j=0;
+        // this.tempword=this.obj_keys[j];
+        // this.word=this.tempword;
         
-        })); 
+        // console.log(this.arraydata);
+       
+        // j++;
+        
+      console.log(this.dict);
+        
+      }
+   
+      // for(let i=0;i<dictionary[i].length;i++){
+      //  this. tempword+=dictionary[i];
+      // }
+      // console.log(this.tempword);
+      // this.word=this.tempword; 
+       
+      //  this. ran_word =this. obj_keys[Math.floor(Math.random() * this.obj_keys.length)];
+      //  this.wordlen=this.ran_word.length;
+      //  console.log("length of random word ", this.wordlen);
+      //  this.word=this.ran_word;
+      // this.dynamicTextBox(this.wordlen,this.ran_word);
+
+      //  console.log("");
+        
+      //   })); 
        /* this.angularFiredatabase.list("/FireData/").subscribe(data=>{
         this.arraydata=data;
         console.log(this.arraydata);
         }); */
-  }
+        // this.dynamicTextBox(this.tempword,this.tempword.length)
+  //}
 
   ionViewDidLoad(wordlen) {
     console.log('ionViewDidLoad GamestartPage');
   }
 
-  dynamicTextBox(wordlen,ran_word)
+  dynamicTextBox(ran_word,wordlen)
   {
    
     let value=[];
     let count;
-    let c=0;
     let currentWordLength:any;
     for(let i=0;i<wordlen;i++)
     {
