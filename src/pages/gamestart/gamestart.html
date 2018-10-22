@@ -30,7 +30,7 @@
   </ion-grid>
   <ion-card>
   
- <ion-card-content class="body1" style="height:5000px">
+ <ion-card-content class="body1" style="height:200px">
   <!-- <ion-label>Score</ion-label>
   <ion-input type="text" [(ngModel)]="score">
   </ion-input>
@@ -44,11 +44,10 @@
 <!--<span *ngFor="let values of elements;let i=index">
   <span [(ngModel)]="elements[i]"></span>
 </span> -->
-
 <div *ngFor="let values of elements; let i=index">
   
   <ng-template [ngIf]="values" [ngIfElse]="loggedOut">
-    <input class="inputBox" type="text">
+    <input class="inputBox" type="text" [(ngModel)]="letter" data-word="up"data-letter="u">
     <!-- input -->
   </ng-template>
   <ng-template #loggedOut>

@@ -1,9 +1,17 @@
-
-{"cup":["cup","up"],
-"bat":["at","tab","bat"],
-"fit":["if","it","fit"],
-"pit":["it","tip","pit"],
-"jog":["go","jog"],
-"toe":["to","toe"],
-"Dam":["am","dam","mad"]
-}
+[
+ 
+    
+    {
+        "word":"cup",
+        "possibilities":["up","cup"],
+        "bonus":[] 
+    },{
+        "word":"tab",
+        "possibilities":["at","bat","tab"],
+        "bonus":[]
+    },{
+        "word":"fit",
+        "possibilities":["if","it","fit"]
+    }
+       
+    ]
