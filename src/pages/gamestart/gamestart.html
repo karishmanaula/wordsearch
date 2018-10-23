@@ -43,12 +43,17 @@
 
 <!--<span *ngFor="let values of elements;let i=index">
   <span [(ngModel)]="elements[i]"></span>
-</span> -->
-<div *ngFor="let values of elements; let i=index">
+</span> -->  
+<div  class="inputBox" id="test" >
+  <!-- <br id="brtag"> -->
+</div>
+
+
+<!--<div *ngFor="let values of elements; let i=index">
   
   <ng-template [ngIf]="values" [ngIfElse]="loggedOut">
-    <input class="inputBox" type="text" [(ngModel)]="letter" data-word="up"data-letter="u">
-    <!-- input -->
+    <input class="inputBox" type="text" [(ngModel)]="letter" data-word=""data-letter="">
+    input 
   </ng-template>
   <ng-template #loggedOut>
     <br>
@@ -56,9 +61,7 @@
      <br> 
     <br>
   </ng-template>
-</div>
-
-
+</div>-->
 
 <!--</ion-item>-->
 </ion-card-content>

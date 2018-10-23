@@ -1,6 +1,4 @@
 [
- 
-    
     {
         "word":"cup",
         "possibilities":["up","cup"],
@@ -13,5 +11,4 @@
         "word":"fit",
         "possibilities":["if","it","fit"]
     }
-       
-    ]
+]

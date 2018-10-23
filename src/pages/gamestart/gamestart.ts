@@ -39,118 +39,65 @@ export class GamestartPage {
     key:string ='username';
     arraydata=[];
     ran_word;
-  temp="";
-  letter=""; 
-
-  arraytemp=[];
-  shuffledword1="";
-  obj_keys=[];
-  obj_values=[];
-  tempword="";
-Level=1;
+    temp="";
+    letter=""; 
+    arraytemp=[];
+    shuffledword1="";
+    obj_keys=[];
+    obj_values=[];
+    tempword="";
+    Level=1;
   constructor(public navCtrl: NavController, private angularFiredatabase:AngularFireDatabase,public navParams: NavParams,public http:HttpClient,private fetch:FetchApiProvider,private storage: Storage) {
    let j=0;
       this.dict=(this.fetch.getDataFromApi().subscribe(json=>{
   
       let value=0;
       let tempword="";
-     let possiblities="";
+      let possiblities="";
       let bonus=0;
+      let splitword=[];
+
       for(let i=0;i<json[0].word.length;i++){
         tempword=json[this.Level-1].word;
         break;
        }
-      console.log("tempword ",tempword);
-      for(let i=0;i<json[0].possibilities.length;i++){
-        possiblities=json[this.Level-1].possibilities;
-         
+    
+      for(let i=0;i<json[0].possibilities[this.Level-1].length;i++){
+        var currentWord = json[0].possibilities[i];
+        splitword.push(currentWord);
+        var v;
+        for(let i=0;i<currentWord.length;i++){
+          v = document.createElement('input'); 
+          v.type="text";
+          v.setAttribute('class','letter');
+          v.setAttribute('data-word',currentWord);
+          v.setAttribute('data-letter',currentWord.charAt(i));
+          document.getElementById('test').append(v);
+        }
+          for(let i=0;i<2;i++){
+               var x=document.createElement('br');
+                document.getElementById('test').appendChild(x);
+                 }
+                  console.log(splitword);
        }
-       console.log(possiblities.length);
-
+       
       for(let i=0;i<json[0].bonus.length;i++){
         bonus=json[this.Level-1].bonus;
 
       }
        this.word=tempword;
        let count="";
-     
        this.arraydata.push(possiblities);
-       //console.log("this.arraydata",this.arraydata);
-       //console.log("this.possibilities ",this.arraydata);
        for(let i=0;i<possiblities.length;i++){
          count=(possiblities[i]);
-         console.log();
-         for(let i=0;i<count.length;i++){
-          
-          this.elements.push(true);
-          
-           }this.elements.push(false);
-  
+         let len=possiblities[i].length;
+         console.log(possiblities[i]);
+         console.log("length",len);
        }
-
-
-       //this.dynamicTextBox(this.word,this.arraydata,bonus);
-     
       
-
-
-
-
-
-
-  
     }));
-      // for(let i=0;i<this.obj_keys.length;i++)let
-      // {
-      //   for (let i in a) {
-      //     let temp = [];
-      //     for (let j in a[i]) {
-       
-      //       temp.push(a[i][j]);
-      //     }
-      //     array.push(temp);
-      //   }
-       
-       
-        // this.tempword=this.obj_keys[i];
-        // for(let j=0;j<Object.keys(this.tempword).length;j++){
-        // console.log("value of keys ",Object.keys(this.tempword));
-        // }
-       
-        // let j=0;
-        // this.tempword=this.obj_keys[j];
-        // this.word=this.tempword;
-        
-        // console.log(this.arraydata);
-       
-        // j++;
-        
-     
-        
-      }
-   
-      // for(let i=0;i<dictionary[i].length;i++){
-      //  this. tempword+=dictionary[i];
-      // }
-      // console.log(this.tempword);
-      // this.word=this.tempword; 
-       
-      //  this. ran_word =this. obj_keys[Math.floor(Math.random() * this.obj_keys.length)];
-      //  this.wordlen=this.ran_word.length;
-      //  console.log("length of random word ", this.wordlen);
-      //  this.word=this.ran_word;
-      // this.dynamicTextBox(this.wordlen,this.ran_word);
 
-      //  console.log("");
-        
-      //   })); 
-       /* this.angularFiredatabase.list("/FireData/").subscribe(data=>{
-        this.arraydata=data;
-        console.log(this.arraydata);
-        }); */
-        // this.dynamicTextBox(this.tempword,this.tempword.length)
-  //}
-    
+  }
 
   ionViewDidLoad(wordlen) {
 
@@ -170,57 +117,6 @@ Level=1;
       console.log( this.elements.push(true));
       }this.elements.push(false);
     }
-   
-  //   var data=(this.fetch.getDataFromApi().subscribe(dictionary=>{
-  //     this.obj_keys=Object.keys(dictionary);
-  //   }));
-  //  let wordlen=ran_word.length;
-  //   let value=[];
-  //   let count;
-  //   let currentWordLength:any;
-  //   for(let i=0;i<wordlen;i++)
-  //   {
-  //   currentWordLength=Math.floor(Math.random()*(wordlen-2))+2;
-  //   console.log(currentWordLength);
-   
-    
-  //   if(currentWordLength!==0)
-  //   {
-  //    // c++;
-  //    this.items.push(currentWordLength); 
-  //   }
-     
-   
-  //   }
-  //   for(let i=0;i<this.items.length;i++){
-  //     this.items.sort();
-  //   }
-  
-  //   console.log("sorted array value",this.items);
-  //   for(let i=0;i<this.items.length;i++){
-  //     count=this.items[i]
-  //     console.log("count",count);
-  //     for(let i=0;i<count;i++){
-  //       this.elements.push(true);
-  //     }
-  //     this.elements.push(false);
-    //}
-
-   
-
-
-
-
-  //   console.log("Value for count",c);
-  //   console.log("value of items array",this.items);
-  //   value.push(this.items);
-  //   console.log("elements inside value array is",value);
-  //   for(let i=0; i<value.length;i++){
-  //     count=value[i];
-  //     for(i=0;i<count;i++)
-  //   this.elements.push(true);
-  // }
-  // this.elements.push(false);
   }
 
 
@@ -231,160 +127,46 @@ Level=1;
    console.log("+++++++++++",splitword);
     console.log("typedText length is",typedText.length);
     this.dict=(this.fetch.getDataFromApi().subscribe(json=>{
-     let word1=[];    
-     let tempword="";
-     let possiblities="";
+   
+     let possiblities=[];
       let bonus=0;
+   
     
-    
-      for(let i=0;i<json[0].word.length;i++){
-        tempword=json[this.Level-1].word;
-        break;
-       }
-      console.log("tempword ",tempword);
-      for(let i=0;i<json[0].possibilities.length;i++){
+     
+       for(let i=0;i<json[0].possibilities[this.Level-1].length;i++){
         possiblities=json[this.Level-1].possibilities;
-         
+        var currentWord = json[0].possibilities[i];
+       // this.elements.push(currentWord);
+        //this.getute('data-word');
+       // this.elements.split(",");
+        console.log("current element inside ",this.elements);
+        console.log("currentWord of verifywords ",currentWord);
+
+         // if(possiblities[i]===typedText){
+           // console.log("******Here i am*******",possiblities[i]);
+         // }
+        // }
+        // for(let i=0;i<possiblities.length;i++){
+        //   console.log("ffffffffffffffgggggggggggg");
+
+        // }
+
+         //}
        }
-       console.log(possiblities.length);
+      
 
       for(let i=0;i<json[0].bonus.length;i++){
         bonus=json[this.Level-1].bonus;
 
       }
-      let c=0;
-       word1.push(typedText);
-       console.log("value of word push is",word1);
       
-      for(let i=0;i<word1.length;i++){
-        if(this.elements){
-        
-       this.letter=splitword[i];
-       //if(this.elements.length===this.typedText.length){
-         //console.log(stringfilled[i]);
-        //this.letter=typedText.slice(0,typedText.length);
-      //  console.log("value of letter is",this.letter);
-
-         // }
-        }
-
-       
-       
-      // if(this.elements){
-      //   if(this.elements.length===this.typedText.length)
-      //   {
-      //     this.letter=stringfilled;
-
-      //   }
-       // c++;
-       // console.log("jjjjjjj",c);
-
-     // }
-      }
-      // while(word[i]==possiblities[i]){
-      //   console.log("great");
-      // }
-      //   else{
-      // console.log("you entered a wrong word");
-      // }  
+      
+     
+     
     }));
 
       }
-  // verifyWords(typedText){
-  //   console.log(typedText);
-  //     let wordfound=false;
-  //     this.showdata=(this.fetch.getUrlApi().subscribe(data=>{
-  //         console.log("--------------------------------");
-  //         console.log(data);
-  //         if(typedText.value===""){
-  //           alert("blank");
-  //           return;
-  //         }
-        
-          
-  //         for (let i=0;i<this.wordmatched.length;i++) {
-  //             if(this.wordmatched[i]==typedText) {
-  //                 alert("duplicate word");
-  //                 return;
-  //             }
-  //         }
-         
-      
-
-  //         let tempword="";
-  //         console.log("loop for showing data");
-  //         console.log(data[0].words.length);
-  //         for(let i=0;i<data[0].words.length;i++) {
-  //             tempword=data[0].words[i];
-             
-  //             console.log(tempword);
-  //         }
-       
-       
-         
-  //         if((typedText.length>this.word.length)||(typedText.length<1)){
-  //             console.log(" check the word limit");
-  //             return;
-  //         }
-   
-  //         for(let i=0;i<data[0].words.length;i++) {
-  //           if(typedText===data[0].words[i]) {
-
-  //               wordfound=true;
-  //                this.items.push(typedText); 
-               
-               
-  //           }
-           
-  //         }
-   
-  //         console.log(wordfound);
-        
-  //         if(wordfound===true) {  
-  //                 console.log("word is matched");
-  //                 this.wordmatched.push(this.typedText);
-  //                 this.score++;
-  //                 console.log(this.score);   
-  //                 console.log(this.wordmatched);
-        
-                
-  //                 //if(data[0].words.length===this.wordmatched.length){
-                 
-  //                   //this.goToNext();
-                 
-                 
-  //           // }
-  //         }
-  //        if((wordfound===false) && (typedText !== "")) {
-  //           console.log('inside missing word');
-  //             this.dict=(this.fetch.getData().subscribe(dictionary=>{
-  //                   console.log('===============================');
-  //                   console.log(dictionary);
-  //                   console.log('===============================');
-  //                   console.log(this.bonusword);
-  //                   for(let i=0;i<this.bonusword.length;i++){
-  //                     if(typedText==this.bonusword[i]){console.log("already exist in bonus");return;}
-  //                   }
-  //                   console.log('not found in bonus words');
-  //                   // console.log(typedText);
-  //                   if(dictionary.hasOwnProperty(typedText)){
-  //                     console.log("bonusword");
-  //                       this.bonusword.push(typedText);
-  //                       this.bonus++;
-  //                   }
-  //                   console.log(this.bonus);
-                    
-  //             }));
-              
-  //           }
-       
-          
-  //       }));
-     
-  // }
-  
  
-  
   datafetching(typedText){
     
     this.dict=(this.fetch.getDataFromApi().subscribe(dictionary=>{
@@ -423,30 +205,11 @@ SaveData(typedText){
 }
 arraypos=[];
 
-
- // }
-/*  shuffelWord (temp){
-  
-    var shuffledWord = '';
-    var words  = temp.split('');
-    console.log("***words are inside  shuffle***" +words);
-    while (words.length > 0) {
-      shuffledWord +=  words.splice(words.length * Math.random() << 0, 1);
-    }
-    return shuffledWord;
-
-
-}*/
-
-
 checkforRandomWordgeneration(typedText,word){
- 
   let count=0;
   let word_letters;
   this.items.push(word.split(''));
-
   this.fetch.getDataFromApi().subscribe(dictionary=>{
-  
     var obj_keys = Object.keys(dictionary); 
     for(var k=0;k<obj_keys.length;k++) 
     {
@@ -466,23 +229,12 @@ checkforRandomWordgeneration(typedText,word){
             this.wordmatched.push(letter);
           }
            
-            //this.wordmatched.push(letter);
-          
           }
           else{
             console.log("unmatched");
           }
-          
-          
-          
-          // match if this letter exists in main array of circle gesture
-          // if matched matched_letter_count++
-          // if word_letters.length == matched_letter_count its a match push it in a saperate array
-          // don't consider words having length 1
-     // }
-    
       }
-      //console.log("kkkkkkkkkkk" ,word_letters);
+     
 
     }
       
